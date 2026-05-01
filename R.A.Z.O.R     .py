@@ -84,7 +84,85 @@ def speak(text):
             os.system("xdg-open speech.mp3")
     except ImportError:
         pass  # gTTS not installed
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popup Example</title>
+  <style>
+    /* Overlay covering the entire page */
+    #popupOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none; /* Hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
+    /* Popup box styling */
+    #popupBox {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      max-width: 80%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    /* Close button styling */
+    #closePopup {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #closePopup:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Popup overlay -->
+<div id="popupOverlay">
+  <div id="popupBox">
+    <h2>Welcome!</h2>
+    <p>This is a popup message.</p>
+    <button id="closePopup">Close</button>
+  </div>
+</div>
+
+<!-- Optional button to trigger popup -->
+<button onclick="showPopup()">Show Popup</button>
+
+<script>
+  // Function to display the popup
+  function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'flex';
+  }
+
+  // Function to hide the popup
+  document.getElementById('closePopup').addEventListener('click', function() {
+    document.getElementById('popupOverlay').style.display = 'none';
+  });
+
+  // Show the popup when the page loads (optional)
+  window.onload = function() {
+    showPopup();
+  };
+</script>
+
+</body>
+</html>
 if __name__ == "__main__":
     ai = RAZOR()
     ai.start()
