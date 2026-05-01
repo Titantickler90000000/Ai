@@ -2,97 +2,50 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TECHNO Help Popup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Download with Popup</title>
 <style>
-  #technoPopup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  #popupOverlay {
     display: none;
-    flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 9999;
-    font-family: Arial, sans-serif;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center; align-items: center;
   }
-  #technoHeader {
-    background: #333;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-    user-select: none;
+  #popupBox {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
     text-align: center;
-    font-weight: bold;
-  }
-  #technoBody {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  #response {
-    flex: 1;
-    margin-bottom: 10px;
-    overflow-y: auto;
-    font-size: 14px;
-  }
-  #technoInput {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px;
-    font-size: 14px;
   }
 </style>
 </head>
 <body>
-<div id="technoPopup">
-  <div id="technoHeader">TECHNO</div>
-  <div id="technoBody">
-    <div id="response"></div>
-    <input type="text" id="technoInput" placeholder="Type your help request..." />
+
+<a href="yourfile.pdf" id="downloadLink" download>Download File</a>
+
+<div id="popupOverlay">
+  <div id="popupBox">
+    <p>Thanks for downloading!</p>
+    <button id="closePopup">Close</button>
   </div>
 </div>
+
 <script>
-  const popup = document.getElementById('technoPopup');
-  const header = document.getElementById('technoHeader');
-  const responseDiv = document.getElementById('response');
-  const input = document.getElementById('technoInput');
+  const downloadLink = document.getElementById('downloadLink');
+  const popupOverlay = document.getElementById('popupOverlay');
+  const closeBtn = document.getElementById('closePopup');
 
-  header.onclick = () => {
-    popup.style.display = popup.style.display === 'none' || popup.style.display === '' ? 'flex' : 'none';
-  };
-
-  input.addEventListener('keydown', async (e) => {
-    if (e.key === 'Enter') {
-      const userInput = input.value.trim();
-      if (userInput === '') return;
-      responseDiv.innerHTML += `<div><strong>You:</strong> ${userInput}</div>`;
-      input.value = '';
-      const reply = await getHelpResponse(userInput);
-      responseDiv.innerHTML += `<div><strong>TECHNO:</strong> ${reply}</div>`;
-      responseDiv.scrollTop = responseDiv.scrollHeight;
-    }
+  downloadLink.addEventListener('click', () => {
+    popupOverlay.style.display = 'flex';
   });
 
-  async function getHelpResponse(prompt) {
-    try {
-      const response = await fetch('http://localhost:3000/api/techno', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-      });
-      const data = await response.json();
-      return data.reply;
-    } catch {
-      return 'Error contacting the AI server.';
-    }
-  }
+  closeBtn.addEventListener('click', () => {
+    popupOverlay.style.display = 'none';
+  });
 </script>
+
 </body>
 </html>
