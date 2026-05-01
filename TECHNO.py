@@ -81,11 +81,17 @@
   });
 
   async function getHelpResponse(prompt) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("This is a simulated response. Replace with your API call.");
-      }, 500);
-    });
+    try {
+      const response = await fetch('http://localhost:3000/api/techno', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await response.json();
+      return data.reply;
+    } catch {
+      return 'Error contacting the AI server.';
+    }
   }
 </script>
 </body>
