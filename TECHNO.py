@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<a href="yourfile.pdf" id="downloadLink" download>Download File</a>
+<a href="https://media.tenor.com/7g75zRi40fAAAAAM/dancing-annoying-dog-deltarune.gif" id="downloadLink" download>Download File</a>
 
 <div id="popupOverlay">
   <div id="popupBox">
