@@ -5,26 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Download with Popup</title>
 <style>
-  #popupOverlay {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.5);
     justify-content: center; align-items: center;
-  }
-  #popupBox {
-    background: #fff;
+    background: Red
     padding: 20px;
     border-radius: 8px;
     max-width: 300px;
     text-align: center;
-  }
 </style>
 </head>
 <body>
 
-<a href="https://media.tenor.com/7g75zRi40fAAAAAM/dancing-annoying-dog-deltarune.gif" id="downloadLink" download>Download File</a>
+<a href="https://media.tenor.com/7g75zRi40fAAAAAM/dancing-annoying-dog-deltarune.gif" 
 
 <div id="popupOverlay">
   <div id="popupBox">
